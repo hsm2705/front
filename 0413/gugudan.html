@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test3.html</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    'use strict';
+
+    function gugudan() {
+      let danStart = document.getElementById("danStart").value.trim();
+      let danEnd = document.getElementById("danEnd").value.trim();
+      let danCnt = document.getElementById("danCnt").value.trim();
+      let str = '', res;
+      let start = Math.min(danStart, danEnd);
+      let end = Math.max(danStart, danEnd);
+
+      if (danStart == "" || danEnd == "" || danCnt == "") {
+        alert("단을 입력하세요.")
+        return false;
+      }
+      
+      str = '<table class="table table-bordered">'
+      for (let i = start; i <= end; i++) {
+        str += '<td><font color="red">' + i + '단</font><br/>';
+        for (let j = 1; j <= 10; j++) {
+          res = i + " * " + j + " = " + (i * j) + "<br>";
+          str += res;
+        }
+        str += "</td>";
+        if (i % danCnt == 0) str += '</tr><tr>';
+      }
+      str += "</tr></table>";
+      demo.innerHTML = "<b>" + str + "</b>";
+    }
+
+    function cleanCheck() {
+      document.getElementById("danStart").value = 1;
+      document.getElementById("danEnd").value = 9;
+      document.getElementById("danCnt").value = 3;
+      demo.innerText = '';
+    }
+  </script>
+  <style>
+    td {
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <p><br /></p>
+  <div class="container">
+    <h2>구구단 연습</h2>
+    <p>출력할 시작단과 끝단을 입력하세요.</p>
+    <div>조건 <br>
+      1. 입력된 시작단이 끝단보다 크면 두 수를 비교해서 작은단부터 출력<br>
+      2. 출력되는 단은 가로방향으로 출력 (한 행에 출력할 횟수 입력)
+    </div>
+    <p>
+      시작 단 : <input type="number" name="dan" id="danStart" value="1" autofocus />
+      끝 단 : <input type="number" name="dan" id="danEnd" value="9" autofocus />
+      출력 횟수 : <input type="number" name="dan" id="danCnt" value="3" autofocus />
+      <input type="button" value="for문 연습" onclick="gugudan()" class="btn btn-success" />
+      <input type="button" value="다시 입력" onclick="cleanCheck()" class="btn btn-warning" />
+    </p>
+    <hr />
+    <div id="demo"></div>
+  </div>
+  <p><br /></p>
+</body>
+</html>
